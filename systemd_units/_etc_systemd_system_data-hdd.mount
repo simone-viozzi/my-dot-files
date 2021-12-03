@@ -1,0 +1,12 @@
+[Unit]
+Description=Mount hdd disk (/data/hdd)
+
+[Mount]
+What=/dev/disk/by-uuid/a81b9eac-926e-4b3c-a6e0-7a56d5117021
+Where=/data/hdd
+Type=ext4
+Options=defaults,rw,noatime
+#TimeoutSec=seconds
+
+[Install]
+WantedBy=multi-user.target
