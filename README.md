@@ -557,3 +557,329 @@ install `gnome-keyring` and run:
 ```bash
 > git config --global credential.helper /usr/lib/git-core/git-credential-libsecret
 ```
+
+### mouse
+
+1. install `Solaar`
+2. install `logiops-git` ( or `logiops` depending on the state of the project )
+3. create a file in `/etc/logid.cfg`
+
+    ```nagios
+    devices: ({
+        name: "Wireless Mouse MX Master 3";
+
+        // A lower threshold number makes the wheel switch to free-spin mode
+        // quicker when scrolling fast.
+        smartshift:
+        {
+            on: true;
+            threshold: 17;
+        };
+
+        hiresscroll:
+        {
+            hires: false;
+            invert: false;
+            target: true;
+            up: {
+                mode: "Axis";
+                axis: "REL_WHEEL";
+                axis_multiplier: 2.5;
+            },
+            down: {
+                mode: "Axis";
+                axis: "REL_WHEEL";
+                axis_multiplier: -2.5;
+            },
+        };
+
+        // Higher numbers make the mouse more sensitive (cursor moves faster),
+        // 4000 max for MX Master 3.
+        dpi: 1750;
+        timeout = 500;
+
+        buttons: (
+        // Make thumb button 10.
+        {
+            cid: 0xc3;
+            action =
+            {
+                type: "Gestures";
+                gestures: (
+                {
+                    direction: "Up";
+                    mode: "OnRelease";
+                    action =
+                    {
+                        type: "Keypress";
+                        keys: ["KEY_LEFTMETA", "KEY_UP"];
+                    };
+                },
+                {
+                    direction: "Down";
+                    mode: "OnRelease";
+                    action =
+                    {
+                        type: "Keypress";
+                        keys: ["KEY_LEFTMETA", "KEY_DOWN"];
+                    };
+                },
+                {
+                    direction: "Left";
+                    mode: "OnRelease";
+                    action =
+                    {
+                        type: "Keypress";
+                        keys: ["KEY_LEFTMETA", "KEY_LEFT"];
+                    };
+                },
+                {
+                    direction: "Right";
+                    mode: "OnRelease";
+                    action =
+                    {
+                        type: "Keypress";
+                        keys: ["KEY_LEFTMETA", "KEY_RIGHT"];
+                    };
+                },
+                {
+                        direction: "None"
+                        mode: "OnRelease"
+                        action =
+                        {
+                            type: "Keypress";
+                            keys: ["KEY_LEFTMETA", "KEY_TAB"];
+                        };
+                }
+                );
+            }
+        },
+        {
+            cid: 0xc4;
+            action =
+                {
+                    type: "Gestures";
+                    gestures: (
+                        {
+                        direction: "None";
+                        mode: "OnRelease";
+                        action =
+                            {
+                                type: "Keypress";
+                                keys: [ "KEY_LEFTMETA", "KEY_F" ];
+                            }
+                        },
+
+                        {
+                        direction: "Up";
+                        mode: "OnRelease";
+                        action =
+                            {
+                                type: "Keypress";
+                                keys: [ "KEY_LEFTMETA", "KEY_BACKSLASH" ];
+                            }
+                        },
+
+                        {
+                        direction: "Down";
+                        mode: "OnRelease";
+                        action =
+                            {
+                                type: "Keypress";
+                                keys: [ "KEY_LEFTMETA", "KEY_LEFTSHIFT", "KEY_BACKSLASH" ];
+                            }
+                        },
+
+                        {
+                        direction: "Left";
+                        mode: "OnRelease";
+                        action =
+                            {
+                                type: "Keypress";
+                                keys: [ "KEY_LEFTMETA", "KEY_K" ];
+                            }
+                        },
+
+                        {
+                        direction: "Right";
+                        mode: "OnRelease";
+                        action =
+                            {
+                                type: "Keypress";
+                                keys: [ "KEY_LEFTMETA", "KEY_J" ];
+                            }
+                        }
+                    );
+                };
+        }
+        );
+
+        thumbwheel:
+        {
+            divert: true;
+            invert: true;
+
+            left: {
+                mode: "Axis";
+                axis: "REL_HWHEEL";
+                axis_multiplier: 0.5;
+            },
+            right: {
+                mode: "Axis";
+                axis: "REL_HWHEEL";
+                axis_multiplier: -0.5;
+            },
+
+            tap: {
+                type: "Keypress";
+                keys: ["KEY_LEFTMETA", "KEY_LEFTCTRL", "KEY_TAB"];
+            };
+        };
+
+    }
+    );
+    ```
+
+    this will configure:
+    - the gesture on the thumb button to change desktop and see the grid of desktops
+    - the side whell to display the expose on touch
+    - the upper small button to interact with the tiling, make a window floating and change layout to the tiling structure
+    - STILL need to configure the back and forward button, they support gestures too
+
+### mpv
+
+1. install mpv
+2. in the folder `~/.config/mpv`
+    - `input.conf`
+
+        ```conf
+        UP add volume +2
+        DOWN add volume -2
+
+        WHEEL_UP add volume +2
+        WHEEL_DOWN add volume -2
+
+        Alt+- add video-zoom -0.05
+        Alt++ add video-zoom 0.05
+
+        Alt+i add video-pan-y 0.01
+        Alt+k add video-pan-y -0.01
+        Alt+j add video-pan-x 0.01
+        Alt+l add video-pan-x -0.01
+        ```
+
+    - `mpv.conf`
+
+        ```conf
+        volume=50
+        save-position-on-quit
+
+
+        profile=gpu-hq
+        scale=ewa_lanczossharp
+        cscale=ewa_lanczossharp
+        video-sync=display-resample
+        interpolation
+        tscale=oversample
+        ```
+
+### ssh config
+
+1. copy your private and public key from the backup into `~/.ssh`
+2. create `~/.ssh/config`
+
+    ```config
+    Host deep-learning.test-cloe.com
+        HostName deep-learning.test-cloe.com
+        User ubuntu
+
+    Host server
+        HostName 195.32.66.195
+        #User simonoe
+        Port 29902
+        IdentityFile ~/.ssh/id_rsa
+        ConnectTimeout 40
+        LocalForward 8080 localhost:8080    # qbittorrent
+        LocalForward 9117 localhost:9117    # Jackett
+        LocalForward 32400 localhost:32400  # plex
+        LocalForward 9090 localhost:9090    # munin
+        LocalForward 5900 localhost:5900    # meld vnc
+        LocalForward 53682 localhost:53682  # meld vnc
+        LogLevel QUIET
+
+
+    Host meld
+        HostName 195.32.66.195
+        Port 2150
+        User root
+        ForwardX11 yes
+        ForwardX11Trusted yes
+    ```
+
+3. make sure the permission for the private key are restrictive
+
+    ```bash
+    total 12
+    drwxr-xr-x 1 simone simone   44 30 dic 16.06 .
+    drwx------ 1 simone simone  560 30 dic 16.06 ..
+    -rw------- 1 simone simone  639 13 dic 16.59 config
+    -rw------- 1 simone simone 3389 27 giu  2021 id_rsa
+    -rw-r--r-- 1 simone simone  750 27 giu  2021 id_rsa.pub
+    ```
+
+### system focus
+
+To have the focus _always_ under the mouse set:
+
+![settings](assets/2021-12-30-20-03-37.png)
+
+### automount of hdd
+
+to automount the hdd ondemand when is needed we need to use a systemd unit.
+
+1. create mountpoint: `sudo mkdir /data/hdd`
+2. add to `/etc/fstab`
+
+    ```fstab
+    UUID=a81b9eac-926e-4b3c-a6e0-7a56d5117021 /data/hdd ext4 noauto,x-systemd.automount 0 0
+    ```
+
+3. to verify that the `fstab` is correct run:
+
+    ```bash
+    sudo findmnt --verify --verbose
+    ```
+
+### backup of home folder
+
+1. install back in time
+2. create a backup folder in `/data/hdd` and chown to you
+
+    ```bash
+    sudo mkdir /data/hdd/home-backup
+    sudo chown simone home-backup/
+    ```
+
+3. link the folder to home
+
+    ```bash
+    ln -s /data/hdd/home-backup/ ~/.backup
+    ```
+
+4. configure back in time:
+
+    ![back in time config 1](assets/2021-12-31-16-35-05.png)
+
+    ![back in time config 2](assets/2021-12-31-16-35-58.png)
+
+    ![back in time config 3](assets/2021-12-31-16-36-26.png)
+
+### fix loading of zsh in dolphin ( DO NOT WORK! )
+
+1. right click on the integrated terminal -> edit current profile
+2. put `/bin/zsh --login` in command
+
+### zsh config
+
+#TODO!
+
