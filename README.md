@@ -881,5 +881,203 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
 
 ### zsh config
 
-#TODO!
+1. make sure your default shell is zsh
 
+    ```bash
+    chsh -s /bin/zsh
+    ```
+
+2. install oh-my-zsh
+
+    ```bash
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    ```
+
+3. install required fonts
+    - ttf-meslo-nerd-font-powerlevel10k
+    - powerline-fonts
+4. install `zsh-theme-powerlevel10k-git`
+5. run:
+
+    ```bash
+    echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+    ```
+
+6. change font in alacritty
+
+    ```bash
+    > mkdir ~/.config/alacritty/
+    > vim ~/.config/alacritty/alacritty.yml
+    font:
+      normal:
+        family: "MesloLGS NF"
+    ```
+
+7. open a terminal and follow Instructions
+
+    ![zsh](2021-12-31-17-53-23.png)
+
+8. install [colorls](https://github.com/athityakumar/colorls)
+    1. `gem install colorls`
+    2. add to `.zshrc`
+
+        ```bash
+        # add ruby to path
+        export PATH="/home/simone/.local/share/gem/ruby/3.0.0/bin:$PATH"
+
+        source $(dirname $(gem which colorls))/tab_complete.sh
+
+        alias lc='colorls -lAh --sd'
+        alias ls='colorls'
+        alias la='colorls -lAh'
+        alias lg='colorls --gs'
+
+        tree() (
+            set -e
+
+                SHORT=g,L:
+                OPTS=$(getopt -a -n tree --options $SHORT -- "$@")
+
+                eval set -- "$OPTS"
+
+            while :
+            do
+            case "$1" in
+                -g )
+                use_git=" "
+                shift 1
+                ;;
+                -L )
+                depht="$2"
+                shift 2
+                ;;
+                -- )
+                shift;
+                break
+                ;;
+                *)
+                echo "Unexpected option: $1"
+                exit 4
+                ;;
+            esac
+            done
+
+                tree="--tree"
+                if [ "$depht" ]; then
+                tree="$tree=$depht"
+            fi
+
+            git=""
+            if [ "$use_git" ]; then
+                git="--gs"
+            fi
+
+            colorls "$tree" "$git"
+        )
+        ```
+
+9. [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+    1. run
+
+        ```bash
+        > git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+        ```
+
+    2. Activate the plugin in ~/.zshrc:
+
+        ```bash
+        plugins=( [plugins...] zsh-syntax-highlighting)
+        ```
+
+10. [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md)
+    1. run
+
+        ```bash
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+        ```
+
+    2. Add the plugin to the list of plugins for Oh My Zsh to load (inside ~/.zshrc):
+
+        ```bash
+        plugins=( 
+            # other plugins...
+            zsh-autosuggestions
+        )
+        ```
+
+11. [zsh-completions](https://github.com/zsh-users/zsh-completions)
+    1. run:
+
+        ```bash
+        git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+        ```
+
+    2. Enable it in your .zshrc by adding it to your plugin list and reloading the completion:
+
+        ```bash
+        plugins=(… zsh-completions)
+        autoload -U compinit && compinit
+        ```
+
+12. install [fzf](https://github.com/junegunn/fzf)
+    1. intsall `fzf` -> official repo
+    2. add to `~/.zshrc`
+
+        ```bash
+        export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+        export FZF_CTRL_T_OPTS="--select-1 --exit-0"
+        export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+
+        fzf-history-widget-accept() {
+            fzf-history-widget
+            zle accept-line
+        }
+        zle     -N     fzf-history-widget-accept
+        bindkey '^X^R' fzf-history-widget-accept
+
+        source "/usr/share/fzf/key-bindings.zsh"
+        source "/usr/share/fzf/completion.zsh"
+        ```
+
+13. vim tab fix, for default vim use 8 spaces tab. create `~/.vimrc`:
+
+    ```bash
+    source /etc/vimrc
+    source $VIMRUNTIME/defaults.vim
+
+
+    set tabstop=4       " The width of a TAB is set to 4.
+                        " Still it is a \t. It is just that
+                        " Vim will interpret it to be having
+                        " a width of 4.
+
+    set shiftwidth=4    " Indents will have a width of 4
+
+    set softtabstop=4   " Sets the number of columns for a TAB
+
+    set expandtab       " Expand TABs to spaces
+    ```
+
+    the first 2 lines are needed to not lose the default configuration, the paths can be recovered running `:version` in a vim editor.
+
+14. [zsh-z](https://github.com/agkozak/zsh-z)
+    1. run:
+
+        ```bash
+        git clone https://github.com/agkozak/zsh-z $ZSH_CUSTOM/plugins/zsh-z
+        ```
+
+    2. add to plugins:
+
+        ```bash
+        plugins=(
+            git
+            zsh-syntax-highlighting
+            zsh-autosuggestions
+            zsh-completions
+            zsh-z
+        )
+        ```
+
+15. colored-man-pages: just add it to the plugins list
+16. docker, docker-compose: just add them to the plugin list
