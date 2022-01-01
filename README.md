@@ -1079,5 +1079,63 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
         )
         ```
 
-15. colored-man-pages: just add it to the plugins list
-16. docker, docker-compose: just add them to the plugin list
+15. other plugings:
+
+    just add them to the plugin list:
+
+    ```bash
+        plugins=(
+        zsh-interactive-cd
+        git
+        zsh-syntax-highlighting
+        zsh-autosuggestions
+        zsh-completions
+        zsh-z
+        colored-man-pages
+        docker
+        docker-compose
+        aliases
+        aws
+        command-not-found
+        extract
+        fzf
+        git-auto-fetch
+        gitignore
+        jsontools
+        rsync
+        systemd
+    )
+    ```
+
+16. before `source oh-my-zsh`:
+
+    ```bash
+    autoload -U compinit && compinit
+    export FZF_BASE=/usr/bin/fzf
+
+    source $ZSH/oh-my-zsh.sh
+    ```
+
+17. cheat:
+
+    add at the end of `.zshrc`
+
+    ```bash
+    cheat() {
+        curl -s cheat.sh/$1 | less
+    }
+    ```
+
+18. docker-cleanup:
+
+    add at the end of `zshrc`
+
+    ```bash
+    docker-cleanup () {
+        docker container prune -f --filter "until=300h"
+        docker image prune -f -a --filter "until=300h"
+        docker volume prune -f --filter "label!=keep"
+        docker network prune -f --filter "until=300h"
+    }
+    ```
+
