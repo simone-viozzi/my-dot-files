@@ -915,7 +915,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
 
 7. open a terminal and follow Instructions
 
-    ![zsh](2021-12-31-17-53-23.png)
+    ![zsh](assets/2021-12-31-17-53-23.png)
 
 8. install [colorls](https://github.com/athityakumar/colorls)
     1. `gem install colorls`
@@ -1139,3 +1139,77 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
     }
     ```
 
+19. alacritty themes
+    1. install `alacritty-colorscheme`
+
+        ```bash
+        pip install --user alacritty-colorscheme
+        ```
+    
+    2. run:
+
+        ```bash
+        mkdir ~/.alacritty-themes
+
+        REPO="https://github.com/aaron-williamson/base16-alacritty.git"
+        DEST="~/.alacritty-themes/aarors-williamson-colorschemes"
+        git clone $REPO $DEST
+        ln ~/.alacritty-themes/aarors-williamson-colorschemes/colors/* "$HOME/.config/alacritty/colors/"
+
+        REPO="https://github.com/eendroroy/alacritty-theme.git"
+        DEST="~/.alacritty-themes/eendroroy-colorschemes"
+        git clone $REPO $DEST
+        ln ~/.alacritty-themes/eendroroy-colorschemes/themes/* "$HOME/.config/alacritty/colors/"
+        ```
+
+    
+
+### fix colorls light theme
+
+```yml
+# Main Colors
+unrecognized_file: "#008B8B" # darkred
+recognized_file:   "#640064" # darkgreen
+executable_file:   "#FF00FF" # green
+dir:               "#808000" # navyblue
+
+# Link
+dead_link: "#00FFFF" # red
+link:      "#FF0000" # cyan
+
+# special files
+socket:    "#A9A9A9" # darkgray
+blockdev:  "#A9A9A9" # darkgray
+chardev:   "#A9A9A9" # darkgray
+
+# Access Modes
+write:     "#00FFFF" # red
+read:      "#2D7BA0" # sienna
+exec:      "#808000" # navyblue
+no_access: white     # black
+
+# Age
+day_old:     "#008B8B" # darkred
+hour_old:    "#13598B" # saddlebrown
+no_modifier: white     # black
+
+# File Size
+file_large:  "#008B8B" # darkred
+file_medium: "#13598B" # saddlebrown
+file_small:  white     # black
+
+# Random
+report: white     # black
+user:   "#8B8B00" # darkblue
+tree:   "#FF0000" # cyan
+empty:  "#0000FF" # yellow
+error:  "#00FFFF" # red
+normal: white     # black
+
+# Git
+addition:     "#8000FF" # chartreuse
+modification: "#6B71BD" # darkkhaki
+deletion:     "#008B8B" # darkred
+untracked:    "#0073FF" # darkorange
+unchanged:    "#640064" # darkgreen
+```
