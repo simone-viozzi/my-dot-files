@@ -1342,8 +1342,6 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
     ```
 
 
-
-
 ### fix hibernation
 
 1. get the UUID of the swap partition
