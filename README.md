@@ -874,7 +874,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
 
     ![back in time config 3](assets/2021-12-31-16-36-26.png)
 
-### fix loading of zsh in dolphin ( DO NOT WORK! )
+### fix loading of zsh in dolphin ( #! WORK IN PROGRESS #! DO NOT WORK! )
 
 1. right click on the integrated terminal -> edit current profile
 2. put `/bin/zsh --login` in command
@@ -1139,7 +1139,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
     }
     ```
 
-19. alacritty themes
+19. alacritty themes ( #! WORK IN PROGRESS )
     1. install `alacritty-colorscheme`
 
         ```bash
@@ -1281,7 +1281,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
 
         4. now when the theme change in alacritty it will change in vim too.
 
-### fix colorls light theme
+### fix colorls light theme ( #! WORK IN PROGRESS )
 
 1. run:
 
@@ -1341,7 +1341,6 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
     unchanged:    "#640064" # darkgreen
     ```
 
-
 ### fix hibernation
 
 1. get the UUID of the swap partition
@@ -1385,3 +1384,88 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
     ```
 
 5. reboot and than try hibernation
+
+
+## docker and gpu
+
+1. install `docker` from the store
+
+2. run:
+
+    ```bash
+    ❯ sudo docker info
+    Client:
+    Context:    default
+    Debug Mode: false
+    Plugins:
+    buildx: Docker Buildx (Docker Inc., v0.7.1-docker)
+    scan: Docker Scan (Docker Inc., v0.1.0-225-ge13563704f)
+
+    Server:
+    Containers: 1
+    Running: 0
+    Paused: 0
+    Stopped: 1
+    Images: 1
+    Server Version: 20.10.12
+    Storage Driver: btrfs
+    Build Version: Btrfs v5.15.1
+    Library Version: 102
+    Logging Driver: json-file
+    Cgroup Driver: systemd
+    Cgroup Version: 2
+    Plugins:
+    Volume: local
+    Network: bridge host ipvlan macvlan null overlay
+    Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+    Swarm: inactive
+    Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
+    Default Runtime: runc
+    Init Binary: docker-init
+    containerd version: 1e5ef943eb76627a6d3b6de8cd1ef6537f393a71.m
+    runc version: v1.0.3-0-gf46b6ba2
+    init version: de40ad0
+    Security Options:
+    apparmor
+    seccomp
+    Profile: default
+    cgroupns
+    Kernel Version: 5.15.12-1-MANJARO
+    Operating System: Manjaro Linux
+    OSType: linux
+    Architecture: x86_64
+    CPUs: 16
+    Total Memory: 31.36GiB
+    Name: simone-b450aorusm
+    ID: RJBF:UKFG:TMPA:QNR5:I2EY:JFM5:HNKQ:I63A:7BMI:5P2F:7AMU:RWFH
+    Docker Root Dir: /var/lib/docker
+    Debug Mode: false
+    Registry: https://index.docker.io/v1/
+    Labels:
+    Experimental: false
+    Insecure Registries:
+    127.0.0.0/8
+    Live Restore Enabled: false
+    ```
+
+    and confirm that `Storage Driver: btrfs`
+
+3. run `sudo docker run hello-world` and than see the subvolumes created:
+
+    ```bash
+    ❯ sudo btrfs subvolume list /
+    ID 259 gen 5260 top level 5 path @log
+    ID 269 gen 5258 top level 5 path @
+    ID 270 gen 5052 top level 5 path timeshift-btrfs/snapshots/2021-12-29_16-00-01/@
+    ID 272 gen 5052 top level 5 path timeshift-btrfs/snapshots/2021-12-30_14-58-11/@
+    ID 273 gen 5052 top level 5 path timeshift-btrfs/snapshots/2021-12-30_22-44-20/@
+    ID 274 gen 5095 top level 5 path timeshift-btrfs/snapshots/2021-12-31_23-00-01/@
+    ID 275 gen 5095 top level 5 path timeshift-btrfs/snapshots/2022-01-01_23-00-01/@
+    ID 276 gen 5095 top level 5 path timeshift-btrfs/snapshots/2022-01-02_16-56-50/@
+    ID 277 gen 5255 top level 269 path var/lib/docker/btrfs/subvolumes/4edcdf833ccf19b852f8ca472fab25fd66d5e35d8504b00cdbb87cf316d610de
+    ID 278 gen 5256 top level 269 path var/lib/docker/btrfs/subvolumes/6deb35b58357895af0293f3d8f5fc762cccdc1949b22e853fdad83d2ba9a977b-init
+    ID 279 gen 5256 top level 269 path var/lib/docker/btrfs/subvolumes/6deb35b58357895af0293f3d8f5fc762cccdc1949b22e853fdad83d2ba9a977b
+    ```
+
+    we see that docker has some subvolumes, this way they wont be backupted with the rest of the system
+
