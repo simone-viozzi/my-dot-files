@@ -1145,7 +1145,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
         ```bash
         pip install --user alacritty-colorscheme
         ```
-    
+
     2. run:
 
         ```bash
@@ -1162,54 +1162,228 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
         ln ~/.alacritty-themes/eendroroy-colorschemes/themes/* "$HOME/.config/alacritty/colors/"
         ```
 
-    
+    3. chose your theme and add to `.zshrc`:
+
+        ```bash
+        LIGHT_COLOR='base16-equilibrium-gray-light.yml'
+        DARK_COLOR='base16-onedark.yml'
+
+        alias day="alacritty-colorscheme -V apply $LIGHT_COLOR"
+        alias night="alacritty-colorscheme -V apply $DARK_COLOR"
+        alias toggle="alacritty-colorscheme -V toggle $LIGHT_COLOR $DARK_COLOR"
+        ```
+
+        to fix the colors in vim and use the `one_dark.yaml` theme do:
+
+        1. copy the `base16-onedark.yml` and keep the copy as a backup
+
+            ```bash
+            cd .config/alacritty/colors
+            cp -L base16-onedark{,-b}.yml
+            ```
+
+        2. edit the `base16-onedark.yml` and change the colors from `one_dark.yaml`
+
+            ```yml
+            # Base16 OneDark - alacritty color config
+            # Lalit Magant (http://github.com/tilal6991)
+            colors:
+            # Default colors
+            primary:
+                background: '0x1e2127' # '0x282c34'
+                foreground: '0xabb2bf'
+
+            # Colors the cursor will use if `custom_cursor_colors` is true
+            cursor:
+                text: '0x1e2127' # '0x282c34'
+                cursor: '0xabb2bf'
+
+            # Normal colors
+            normal:
+                black:   '0x1e2127' # '0x282c34'
+                red:     '0xe06c75'
+                green:   '0x98c379'
+                yellow:  '0xd19a66' # '0xe5c07b'
+                blue:    '0x61afef'
+                magenta: '0xc678dd'
+                cyan:    '0x56b6c2'
+                white:   '0xabb2bf'
+
+            # Bright colors
+            bright:
+                black:   '0x5c6370' # '0x545862'
+                red:     '0xe06c75'
+                green:   '0x98c379'
+                yellow:  '0xd19a66' # '0xe5c07b'
+                blue:    '0x61afef'
+                magenta: '0xc678dd'
+                cyan:    '0x56b6c2'
+                white:   '0xffffff' # '0xc8ccd4'
+
+
+            draw_bold_text_with_bright_colors: false
+            ```
+
+        3. edit `~/.vimrc`
+
+            ```vim
+            Plugin 'chriskempson/base16-vim'
+
+            " The following are examples of different formats supported.
+            " Keep Plugin commands between vundle#begin/end.
+            " plugin on GitHub repo
+            "Plugin 'tpope/vim-fugitive'
+            " plugin from http://vim-scripts.org/vim/scripts.html
+            " Plugin 'L9'
+            " Git plugin not hosted on GitHub
+            "Plugin 'git://git.wincent.com/command-t.git'
+            " git repos on your local machine (i.e. when working on your own plugin)
+            "Plugin 'file:///home/gmarik/path/to/plugin'
+            " The sparkup vim script is in a subdirectory of this repo called vim.
+            " Pass the path to set the runtimepath properly.
+            "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+            " Install L9 and avoid a Naming conflict if you've already installed a
+            " different version somewhere else.
+            " Plugin 'ascenator/L9', {'name': 'newL9'}
+
+            " All of your Plugins must be added before the following line
+            call vundle#end()            " required
+            filetype plugin indent on    " required
+            " To ignore plugin indent changes, instead use:
+            "filetype plugin on
+            "
+            " Brief help
+            " :PluginList       - lists configured plugins
+            " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+            " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+            " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+            "
+            " see :h vundle for more details or wiki for FAQ
+            " Put your non-Plugin stuff after this line
+
+
+            set tabstop=4       " The width of a TAB is set to 4.
+                                " Still it is a \t. It is just that
+                                " Vim will interpret it to be having
+                                " a width of 4.
+
+            set shiftwidth=4    " Indents will have a width of 4
+
+            set softtabstop=4   " Sets the number of columns for a TAB
+
+            set expandtab       " Expand TABs to spaces
+
+            if filereadable(expand("~/.vimrc_background"))
+                let base16colorspace=256          " Remove this line if not necessary
+                source ~/.vimrc_background
+            endif
+            ```
+
+        4. now when the theme change in alacritty it will change in vim too.
 
 ### fix colorls light theme
 
-```yml
-# Main Colors
-unrecognized_file: "#008B8B" # darkred
-recognized_file:   "#640064" # darkgreen
-executable_file:   "#FF00FF" # green
-dir:               "#808000" # navyblue
+1. run:
 
-# Link
-dead_link: "#00FFFF" # red
-link:      "#FF0000" # cyan
+    ```bash
+    cp /home/simone/.local/share/gem/ruby/3.0.0/gems/colorls-1.4.4/lib/yaml/light_colors.yaml ~/.config/colorls/light_colors.yaml
+    ```
 
-# special files
-socket:    "#A9A9A9" # darkgray
-blockdev:  "#A9A9A9" # darkgray
-chardev:   "#A9A9A9" # darkgray
+    create the folder if it doents not exist
 
-# Access Modes
-write:     "#00FFFF" # red
-read:      "#2D7BA0" # sienna
-exec:      "#808000" # navyblue
-no_access: white     # black
+2. edit the file and modify every color to it's [opposite](https://www.canva.com/colors/color-wheel/), to convert names to hex use [this](https://en.wikipedia.org/wiki/X11_color_names)
 
-# Age
-day_old:     "#008B8B" # darkred
-hour_old:    "#13598B" # saddlebrown
-no_modifier: white     # black
+    ```yml
+    # Main Colors
+    unrecognized_file: "#008B8B" # darkred
+    recognized_file:   "#640064" # darkgreen
+    executable_file:   "#FF00FF" # green
+    dir:               "#808000" # navyblue
 
-# File Size
-file_large:  "#008B8B" # darkred
-file_medium: "#13598B" # saddlebrown
-file_small:  white     # black
+    # Link
+    dead_link: "#00FFFF" # red
+    link:      "#FF0000" # cyan
 
-# Random
-report: white     # black
-user:   "#8B8B00" # darkblue
-tree:   "#FF0000" # cyan
-empty:  "#0000FF" # yellow
-error:  "#00FFFF" # red
-normal: white     # black
+    # special files
+    socket:    "#A9A9A9" # darkgray
+    blockdev:  "#A9A9A9" # darkgray
+    chardev:   "#A9A9A9" # darkgray
 
-# Git
-addition:     "#8000FF" # chartreuse
-modification: "#6B71BD" # darkkhaki
-deletion:     "#008B8B" # darkred
-untracked:    "#0073FF" # darkorange
-unchanged:    "#640064" # darkgreen
-```
+    # Access Modes
+    write:     "#00FFFF" # red
+    read:      "#2D7BA0" # sienna
+    exec:      "#808000" # navyblue
+    no_access:  white    # black
+
+    # Age
+    day_old:     "#008B8B" # darkred
+    hour_old:    "#13598B" # saddlebrown
+    no_modifier:  white    # black
+
+    # File Size
+    file_large:  "#008B8B" # darkred
+    file_medium: "#13598B" # saddlebrown
+    file_small:   white    # black
+
+    # Random
+    report:  white    # black
+    user:   "#8B8B00" # darkblue
+    tree:   "#FF0000" # cyan
+    empty:  "#0000FF" # yellow
+    error:  "#00FFFF" # red
+    normal:  white    # black
+
+    # Git
+    addition:     "#8000FF" # chartreuse
+    modification: "#6B71BD" # darkkhaki
+    deletion:     "#008B8B" # darkred
+    untracked:    "#0073FF" # darkorange
+    unchanged:    "#640064" # darkgreen
+    ```
+
+
+
+
+### fix hibernation
+
+1. get the UUID of the swap partition
+
+    ```bash
+    ❯ lsblk --fs
+    NAME        FSTYPE FSVER LABEL    UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+    sda
+    ├─sda1      swap   1              5618d796-e5de-40ac-98ee-704cbd0d94b4                [SWAP]
+    └─sda2      btrfs                 8c881877-e7f4-493d-a658-5422c701aca5  340,2G    14% /home
+                                                                                        /var/cache
+    sdb
+    ├─sdb1      vfat   FAT32          5AEA-94DB
+    ├─sdb2
+    ├─sdb3      ntfs                  2C1AEBA61AEB6AF2
+    └─sdb4      ntfs                  BC52CA1152C9D076
+    sdc
+    └─sdc2      ext4   1.0            a81b9eac-926e-4b3c-a6e0-7a56d5117021  227,1G    70% /data/hdd
+    nvme0n1
+    ├─nvme0n1p1 vfat   FAT32 NO_LABEL 9DC0-3A68                             298,8M     0% /boot/efi
+    └─nvme0n1p2 btrfs                 08c1a849-60c7-4f1b-aeca-1b2815a7cdb2    453G     2% /var/log
+                                                                                        /
+    ```
+
+2. edit `/etc/default/grub`
+
+    ```bash
+    GRUB_CMDLINE_LINUX_DEFAULT="quiet apparmor=1 security=apparmor udev.log_priority=3 resume=UUID=5618d796-e5de-40ac-98ee-704cbd0d94b4"
+    ```
+
+3. run:
+
+    ```bash
+    ❯ sudo update-grub
+    ```
+
+4. edit `/etc/mkinitcpio.conf` in the HOOK section edit the `HOOK=` line, put resume before `filesystems`
+
+    ```bash
+    HOOKS="base udev autodetect modconf block keyboard keymap consolefont resume filesystems"
+    ```
+
+5. reboot and than try hibernation
