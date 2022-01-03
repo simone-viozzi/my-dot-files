@@ -1497,10 +1497,11 @@ sudo systemctl enable containerd.service
     GRUB_CMDLINE_LINUX_DEFAULT="quiet apparmor=1 security=apparmor udev.log_priority=3 resume=UUID=5618d796-e5de-40ac-98ee-704cbd0d94b4 systemd.unified_cgroup_hierarchy=false"
     ```
 
-5. edit `/etc/nvidia-container-runtime/config.toml` and set:
+5. `sudo update-grub`
+6. edit `/etc/nvidia-container-runtime/config.toml` and set:
 
     ```bash
     no-cgroups = false
     ```
 
-6. rebooot
+7. rebooot
