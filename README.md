@@ -1385,7 +1385,6 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
 
 5. reboot and than try hibernation
 
-
 ## docker and gpu
 
 1. install `docker` from the store
@@ -1469,3 +1468,39 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
 
     we see that docker has some subvolumes, this way they wont be backupted with the rest of the system
 
+### run docker without sudo
+
+1. `sudo groupadd docker`
+2. `sudo usermod -aG docker $USER`
+3. `newgrp docker`
+4. `docker run hello-world`
+
+### docker on startup
+
+```bash
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+```
+
+### docker compose
+
+1. install `docker-compose` 
+
+### GPU support
+
+1. inatsll `libnvidia-container-tools` from aur
+2. install `nvidia-container-toolkit` from aur
+3. rebooot
+4. edit `/etc/default/grub` and add `systemd.unified_cgroup_hierarchy=false` to kernel parameters
+
+    ```bash
+    GRUB_CMDLINE_LINUX_DEFAULT="quiet apparmor=1 security=apparmor udev.log_priority=3 resume=UUID=5618d796-e5de-40ac-98ee-704cbd0d94b4 systemd.unified_cgroup_hierarchy=false"
+    ```
+
+5. edit `/etc/nvidia-container-runtime/config.toml` and set:
+
+    ```bash
+    no-cgroups = false
+    ```
+
+6. rebooot
