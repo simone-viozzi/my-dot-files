@@ -154,6 +154,8 @@ alias la='colorls -lAh'
 alias lg='colorls --gs'
 alias xopen="gio open 2>/dev/null"
 alias yolo="git add . && git commit -m \"$(curl -s http://whatthecommit.com/index.txt)\" && git push"
+alias conf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias conf-yolo="conf commit -m \"$(curl -s http://whatthecommit.com/index.txt)\" && conf push"
 alias a="acs"
 
 tree() (
@@ -235,4 +237,4 @@ alias day="alacritty-colorscheme -V apply $LIGHT_COLOR"
 alias night="alacritty-colorscheme -V apply $DARK_COLOR"
 alias toggle="alacritty-colorscheme -V toggle $LIGHT_COLOR $DARK_COLOR"
 
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
