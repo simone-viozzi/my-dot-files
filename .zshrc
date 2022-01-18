@@ -238,3 +238,4 @@ alias night="alacritty-colorscheme -V apply $DARK_COLOR"
 alias toggle="alacritty-colorscheme -V toggle $LIGHT_COLOR $DARK_COLOR"
 
 
+export DIFFPROG="gksu meld"
