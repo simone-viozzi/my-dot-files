@@ -522,7 +522,7 @@ install [`kwin-bismuth`](https://github.com/Bismuth-Forge/bismuth) from aur, tha
     - spectacle
         - RectangularRegionScreenShot=Meta+Shift+S
 
-### google integration
+## google integration
 
 1. install `kio-gdrive`
 2. go to setting -> online accounts -> add google
@@ -530,7 +530,7 @@ install [`kwin-bismuth`](https://github.com/Bismuth-Forge/bismuth) from aur, tha
 4. now you have drive in dolphin -> network -> google drive
 5. for calendar install `KOrganizer` and configure it
 
-### vscode settings
+## vscode settings
 
 1. install `gnome-keyring`
 2. login on vscode with github
@@ -550,7 +550,7 @@ install [`kwin-bismuth`](https://github.com/Bismuth-Forge/bismuth) from aur, tha
     4. `ln -s /usr/share/hunspell/* ~/.config/Code/Dictionaries`
     5. select the dictioraries from the eye like icon in the lower right
 
-### git and github
+## git and github
 
 install `gnome-keyring` and run:
 
@@ -558,7 +558,7 @@ install `gnome-keyring` and run:
 > git config --global credential.helper /usr/lib/git-core/git-credential-libsecret
 ```
 
-### mouse
+## mouse
 
 1. install `Solaar`
 2. install `logiops-git` ( or `logiops` depending on the state of the project )
@@ -746,7 +746,7 @@ install `gnome-keyring` and run:
     - the upper small button to interact with the tiling, make a window floating and change layout to the tiling structure
     - STILL need to configure the back and forward button, they support gestures too
 
-### mpv
+## mpv
 
 1. install mpv
 2. in the folder `~/.config/mpv`
@@ -783,7 +783,7 @@ install `gnome-keyring` and run:
         tscale=oversample
         ```
 
-### ssh config
+## ssh config
 
 1. copy your private and public key from the backup into `~/.ssh`
 2. create `~/.ssh/config`
@@ -827,13 +827,13 @@ install `gnome-keyring` and run:
     -rw-r--r-- 1 simone simone  750 27 giu  2021 id_rsa.pub
     ```
 
-### system focus
+## system focus
 
 To have the focus _always_ under the mouse set:
 
 ![settings](assets/2021-12-30-20-03-37.png)
 
-### automount of hdd
+## automount of hdd
 
 to automount the hdd ondemand when is needed we need to use a systemd unit.
 
@@ -850,7 +850,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
     sudo findmnt --verify --verbose
     ```
 
-### backup of home folder
+## backup of home folder
 
 1. install back in time
 2. create a backup folder in `/data/hdd` and chown to you
@@ -874,12 +874,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
 
     ![back in time config 3](assets/2021-12-31-16-36-26.png)
 
-### fix loading of zsh in dolphin ( #! WORK IN PROGRESS #! DO NOT WORK! )
-
-1. right click on the integrated terminal -> edit current profile
-2. put `/bin/zsh --login` in command
-
-### zsh config
+## zsh config
 
 1. make sure your default shell is zsh
 
@@ -931,49 +926,6 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
         alias ls='colorls'
         alias la='colorls -lAh'
         alias lg='colorls --gs'
-
-        tree() (
-            set -e
-
-                SHORT=g,L:
-                OPTS=$(getopt -a -n tree --options $SHORT -- "$@")
-
-                eval set -- "$OPTS"
-
-            while :
-            do
-            case "$1" in
-                -g )
-                use_git=" "
-                shift 1
-                ;;
-                -L )
-                depht="$2"
-                shift 2
-                ;;
-                -- )
-                shift;
-                break
-                ;;
-                *)
-                echo "Unexpected option: $1"
-                exit 4
-                ;;
-            esac
-            done
-
-                tree="--tree"
-                if [ "$depht" ]; then
-                tree="$tree=$depht"
-            fi
-
-            git=""
-            if [ "$use_git" ]; then
-                git="--gs"
-            fi
-
-            colorls "$tree" "$git"
-        )
         ```
 
 9. [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
@@ -1281,7 +1233,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
 
         4. now when the theme change in alacritty it will change in vim too.
 
-### fix colorls light theme ( #! WORK IN PROGRESS )
+## fix colorls light theme ( #! WORK IN PROGRESS )
 
 1. run:
 
@@ -1341,7 +1293,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
     unchanged:    "#640064" # darkgreen
     ```
 
-### fix hibernation
+## fix hibernation
 
 1. get the UUID of the swap partition
 
@@ -1505,3 +1457,33 @@ sudo systemctl enable containerd.service
     ```
 
 7. rebooot
+
+## dotfiles repo managment
+
+1. create a bare repository in `~`
+
+    ```bash
+    git init --bare $HOME/.cfg
+
+    alias conf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+   
+    conf config --local status.showUntrackedFiles no
+    ```
+
+2. add the alias to `.zshrc`
+
+    ```bash
+    alias conf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+    ```
+
+3. add some dotfiles ( tab completition cannot be enabled because `showUntrackedFiles no` so to add a file, ls it and than `conf add $_` )
+
+4. add the remote repository
+
+    ```bash
+    config remote add origin https://github.com/simone-viozzi/my-dot-files.git
+
+    config checkout -b dotfiles
+
+    conf push -u origin dotfiles
+    ```
