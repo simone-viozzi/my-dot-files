@@ -155,7 +155,7 @@ alias la='colorls -lAh'
 alias lg='colorls --gs'
 alias xopen="gio open 2>/dev/null"
 alias yolo="git add . && git commit -m \"$(curl -s http://whatthecommit.com/index.txt)\" && git push"
-alias conf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias conf='dotbare'
 alias conf-yolo="conf commit -a -m \"$(curl -s http://whatthecommit.com/index.txt)\" && conf push"
 alias a="acs"
 alias h2="howdoi -c"
@@ -242,3 +242,6 @@ alias toggle="alacritty-colorscheme -V toggle $LIGHT_COLOR $DARK_COLOR"
 
 
 export DIFFPROG="gksu meld"
+
+export DOTBARE_DIR="$HOME/.cfg"
+export DOTBARE_TREE="$HOME"
