@@ -147,12 +147,11 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-source $(dirname $(gem which colorls))/tab_complete.sh
-
-alias lc='colorls -lAh --sd'
-alias ls='colorls'
-alias la='colorls -lAh'
-alias lg='colorls --gs'
+alias ls='exa --icons -F'
+alias la='exa -la --icons -F -G'
+alias lg='exa -l -F -G --icons --git --sort=modified'
+alias tree='exa -F --icons --tree'
+alias tree-git='exa --icons --tree --git-ignore'
 alias xopen="gio open 2>/dev/null"
 alias yolo="git add . && git commit -m \"$(curl -s http://whatthecommit.com/index.txt)\" && git push"
 alias conf='dotbare'
@@ -160,52 +159,6 @@ alias conf-yolo="conf commit -a -m \"$(curl -s http://whatthecommit.com/index.tx
 alias a="acs"
 alias h2="howdoi -c"
 
-
-tree() (
-    set -e
-
-    SHORT=g,L:
-    OPTS=$(getopt -a -n tree --options $SHORT -- "$@")
-
-    eval set -- "$OPTS"
-    
-    echo "$@"
-
-    while :
-    do
-    case "$1" in
-        -g )
-        use_git=" "
-        shift 1
-        ;;
-        -L )
-        depht="$2"
-        shift 2
-        ;;
-        -- )
-        shift;
-        break
-        ;;
-        *)
-        echo "Unexpected option: $1"
-        exit 4
-        ;;
-    esac
-    done
-	
-    tree="--tree"
-    if [ "$depht" ]; then
-        tree="$tree=$depht"
-    fi
-
-    git=""
-    if [ "$use_git" ]; then
-        git="--gs"
-    fi
-    
-    echo "$tree" "$git"
-    colorls $tree $git 
-)
 
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_T_OPTS="--select-1 --exit-0"
