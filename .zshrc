@@ -102,6 +102,7 @@ plugins=(
     rsync
     systemd 
     direnv
+    dotbare
 )
 
 fpath=($fpath /usr/share/zsh/vendor-completions)
@@ -157,6 +158,8 @@ alias yolo="git add . && git commit -m \"$(curl -s http://whatthecommit.com/inde
 alias conf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias conf-yolo="conf commit -a -m \"$(curl -s http://whatthecommit.com/index.txt)\" && conf push"
 alias a="acs"
+alias h2="howdoi -c"
+
 
 tree() (
     set -e
