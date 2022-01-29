@@ -148,8 +148,8 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 
 alias ls='exa --icons -F'
-alias la='exa -la --icons -F -G'
-alias lg='exa -l -F -G --icons --git --sort=modified'
+alias la='exa -la --icons -F'
+alias lg='exa -l -F --icons --git --sort=modified'
 alias tree='exa -F --icons --tree'
 alias tree-git='exa --icons --tree --git-ignore'
 alias xopen="gio open 2>/dev/null"
@@ -201,3 +201,10 @@ export DIFFPROG="gksu meld"
 _dotbare_completion_cmd
 export DOTBARE_DIR="$HOME/.cfg"
 export DOTBARE_TREE="$HOME"
+
+
+
+revive-mouse () {
+    sudo bash -c 'echo -n "0000:08:00.3" > /sys/bus/pci/drivers/xhci_hcd/unbind'
+    sudo bash -c 'echo -n "0000:08:00.3" > /sys/bus/pci/drivers/xhci_hcd/bind'
+}
