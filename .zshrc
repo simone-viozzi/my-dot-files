@@ -141,6 +141,7 @@ source $ZSH/oh-my-zsh.sh
 # add ruby to path
 export PATH="/home/simone/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
+
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -158,6 +159,7 @@ alias conf='dotbare'
 alias conf-yolo="conf commit -a -m \"$(curl -s http://whatthecommit.com/index.txt)\" && conf push"
 alias a="acs"
 alias h2="howdoi -c"
+alias tlmgr='TEXMFDIST/scripts/texlive/tlmgr.pl --usermode'
 
 
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
@@ -208,3 +210,10 @@ revive-mouse () {
     sudo bash -c 'echo -n "0000:08:00.3" > /sys/bus/pci/drivers/xhci_hcd/unbind'
     sudo bash -c 'echo -n "0000:08:00.3" > /sys/bus/pci/drivers/xhci_hcd/bind'
 }
+
+
+PATH="/home/simone/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/simone/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/simone/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/simone/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/simone/perl5"; export PERL_MM_OPT;
