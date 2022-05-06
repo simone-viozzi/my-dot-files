@@ -84,9 +84,9 @@ ZSH_THEME="robbyrussell"
 plugins=(
     zsh-interactive-cd
     git
-    zsh-syntax-highlighting 
-	zsh-autosuggestions
-	zsh-completions
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-completions
     zsh-z
     colored-man-pages
     docker
@@ -100,7 +100,7 @@ plugins=(
     gitignore
     jsontools
     rsync
-    systemd 
+    systemd
     direnv
     dotbare
 )
