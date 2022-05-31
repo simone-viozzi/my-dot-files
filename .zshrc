@@ -158,9 +158,9 @@ alias yolo="git add . && git commit -m \"$(curl -s http://whatthecommit.com/inde
 alias conf='dotbare'
 alias conf-yolo="conf commit -a -m \"$(curl -s http://whatthecommit.com/index.txt)\" && conf push"
 alias a="acs"
-alias h2="howdoi -c"
+alias hless='function hdi(){ howdoi $* -ca | less --raw-control-chars --quit-if-one-screen --no-init; }; hdi'
 alias tlmgr='TEXMFDIST/scripts/texlive/tlmgr.pl --usermode'
-alias rename="perl-rename'
+alias rename="perl-rename"
 
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_T_OPTS="--select-1 --exit-0"
