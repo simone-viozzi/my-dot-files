@@ -154,11 +154,11 @@ alias lg='exa -l -F --icons --git --sort=modified'
 alias tree='exa -F --icons --tree'
 alias tree-git='exa --icons --tree --git-ignore'
 alias xopen="gio open 2>/dev/null"
-alias yolo="git add . && git commit -m \"$(curl -s http://whatthecommit.com/index.txt)\" && git push"
+alias yolo="git add . && curl -s http://whatthecommit.com/index.txt | git commit -F - && git push"
 alias conf='dotbare'
-alias conf-yolo="conf commit -a -m \"$(curl -s http://whatthecommit.com/index.txt)\" && conf push"
+alias conf-yolo="curl -s http://whatthecommit.com/index.txt | conf commit -a -F - && conf push"
 alias a="acs"
-alias hless='function hdi(){ howdoi $* -ca | less --raw-control-chars --quit-if-one-screen --no-init; }; hdi'
+alias h2='function hdi(){ howdoi $* -ca | less --raw-control-chars --quit-if-one-screen --no-init; }; hdi'
 alias tlmgr='TEXMFDIST/scripts/texlive/tlmgr.pl --usermode'
 alias rename="perl-rename"
 
