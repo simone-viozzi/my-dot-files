@@ -1,8 +1,10 @@
 #!/bin/sh
 
-exec yakuake &
-
 sleep 1
+
+/usr/bin/yakuake --im /usr/bin/fcitx --inputstyle onthespot &
+
+sleep 2
 
 #INITIAL_ID=`qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.activeSessionId`
 #function addSession {

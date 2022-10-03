@@ -153,6 +153,7 @@ alias la='exa -la --icons -F'
 alias lg='exa -l -F --icons --git --sort=modified'
 alias tree='exa -F --icons --tree'
 alias tree-git='exa --icons --tree --git-ignore'
+alias du='echo "WARNING use dust" && du'
 alias xopen="gio open 2>/dev/null"
 alias yolo="git add . && curl -s http://whatthecommit.com/index.txt | git commit -F - && git push"
 alias conf='dotbare'
@@ -185,6 +186,7 @@ docker-cleanup () {
     docker image prune -f -a --filter "until=300h"
     docker volume prune -f --filter "label!=keep"
     docker network prune -f --filter "until=300h"
+    docker builder prune -f --filter "until=300h"
 }
 
 
@@ -217,3 +219,8 @@ PERL5LIB="/home/simone/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LI
 PERL_LOCAL_LIB_ROOT="/home/simone/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/simone/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/simone/perl5"; export PERL_MM_OPT;
+
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

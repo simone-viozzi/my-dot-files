@@ -2,7 +2,7 @@
 #assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["system", "snap", "flatpak"]
+disable = ["system", "snap", "flatpak", "gcloud"]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]
