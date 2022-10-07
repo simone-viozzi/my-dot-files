@@ -1,0 +1,15 @@
+[user]
+	email = viozzis333@gmail.com
+	name = simone-viozzi
+[credential]
+	helper = /usr/lib/git-core/git-credential-libsecret
+[diff]
+    tool = vscode
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+    tool = code
+[mergetool "code"]
+    cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
+[core]
+	editor = vim
