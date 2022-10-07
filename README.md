@@ -912,7 +912,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
 
     ![zsh](assets/2021-12-31-17-53-23.png)
 
-8. install [colorls](https://github.com/athityakumar/colorls)
+8. ~~install [colorls](https://github.com/athityakumar/colorls)~~
     1. `gem install colorls`
     2. add to `.zshrc`
 
@@ -964,7 +964,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
         git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
         ```
 
-    2. Enable it in your .zshrc by adding it to your plugin list and reloading the completion:
+    2. ~~Enable it in your .zshrc by adding it to your plugin list and reloading the completion:~~ follow the readme for updated instructions
 
         ```bash
         plugins=(… zsh-completions)
@@ -973,7 +973,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
 
 12. install [fzf](https://github.com/junegunn/fzf)
     1. intsall `fzf` -> official repo
-    2. add to `~/.zshrc`
+    2. ~~add to `~/.zshrc`~~
 
         ```bash
         export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
@@ -1059,7 +1059,7 @@ to automount the hdd ondemand when is needed we need to use a systemd unit.
     )
     ```
 
-16. before `source oh-my-zsh`:
+16. ~~before `source oh-my-zsh`:~~
 
     ```bash
     autoload -U compinit && compinit
