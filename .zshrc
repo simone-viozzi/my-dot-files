@@ -91,13 +91,14 @@ plugins=(
     colored-man-pages
     docker
     docker-compose
+    forgit # https://github.com/wfxr/forgit/issues/212
     aliases
     aws
     command-not-found
     extract
     fzf
     git-auto-fetch
-    gitignore
+    #gitignore
     jsontools
     rsync
     systemd
@@ -105,7 +106,7 @@ plugins=(
     dotbare
 )
 
-fpath=($fpath /usr/share/zsh/vendor-completions)
+fpath=(/home/simone/.zsh-completion $fpath /usr/share/zsh/vendor-completions)
 
 autoload -U compinit && compinit
 export FZF_BASE=/usr/bin/fzf
@@ -163,16 +164,16 @@ alias h2='function hdi(){ howdoi $* -ca | less --raw-control-chars --quit-if-one
 alias tlmgr='TEXMFDIST/scripts/texlive/tlmgr.pl --usermode'
 alias rename="perl-rename"
 
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-export FZF_CTRL_T_OPTS="--select-1 --exit-0"
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-
-fzf-history-widget-accept() {
-    fzf-history-widget
-    zle accept-line
-}
-zle     -N     fzf-history-widget-accept
-bindkey '^X^R' fzf-history-widget-accept
+# export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+# export FZF_CTRL_T_OPTS="--select-1 --exit-0"
+# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+# 
+# fzf-history-widget-accept() {
+#     fzf-history-widget
+#     zle accept-line
+# }
+# zle     -N     fzf-history-widget-accept
+# bindkey '^X^R' fzf-history-widget-accept
 
 source "/usr/share/fzf/key-bindings.zsh"
 source "/usr/share/fzf/completion.zsh"
@@ -224,3 +225,18 @@ PERL_MM_OPT="INSTALL_BASE=/home/simone/perl5"; export PERL_MM_OPT;
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+
+# https://github.com/wfxr/forgit#git
+#   - use git forgit ... to get interactive version
+export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"
+alias igit="git forgit"
+
+
+unalias z 2> /dev/null
+z() {
+    [ $# -gt 0 ] && zshz "$*" && return
+    cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+}
+
+
