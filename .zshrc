@@ -4,7 +4,7 @@
 (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
@@ -167,7 +167,7 @@ alias rename="perl-rename"
 # export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 # export FZF_CTRL_T_OPTS="--select-1 --exit-0"
 # export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-# 
+#
 # fzf-history-widget-accept() {
 #     fzf-history-widget
 #     zle accept-line
@@ -239,4 +239,24 @@ z() {
     cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 
+fzf-z-widget() {
+    # if the executed command is z
+    [[ $BUFFER != "z "* ]] && return 1
+    
+    # remove the z command from the buffer
+    search="${BUFFER#z }"
+    dir=$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }$search" | sed 's/^[0-9,.]* *//')
+    
+    if [[ -z "$dir" ]]; then
+        zle redisplay
+        return 0
+    fi
+    BUFFER="builtin cd -- ${(q)dir}"
+    zle accept-line
+    unset dir # ensure this doesn't end up appearing in prompt expansion
+    zle reset-prompt
+}
+
+zle     -N   fzf-z-widget
+bindkey '^I' fzf-z-widget
 
