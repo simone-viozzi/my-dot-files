@@ -241,7 +241,7 @@ z() {
 
 fzf-z-widget() {
     # if the executed command is z
-    [[ $BUFFER != "z "* ]] && return 1
+    [[ $BUFFER != "z "* ]] && zle fzf-completion && return
     
     # remove the z command from the buffer
     search="${BUFFER#z }"
