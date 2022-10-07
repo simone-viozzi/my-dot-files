@@ -1,0 +1,13 @@
+[Desktop Entry]
+DefaultProfile=Breath.edits.profile
+
+[Dialogs]
+ConfirmQuit=false
+FirstRun=false
+
+[Window]
+Height=80
+KeepOpen=false
+ShowSystrayIcon=false
+ShowTabBar=false
+ShowTitleBar=false
