@@ -84,15 +84,15 @@ ZSH_THEME="robbyrussell"
 plugins=(
     zsh-interactive-cd
     git
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    zsh-completions
-    zsh-z
-    colored-man-pages
+    zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
+    zsh-autosuggestions     # https://github.com/zsh-users/zsh-autosuggestions
+    zsh-completions         # https://github.com/zsh-users/zsh-completions
+    zsh-z                   # https://github.com/agkozak/zsh-z
+    colored-man-pages       # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
     docker
-    docker-compose
-    forgit # https://github.com/wfxr/forgit/issues/212
-    aliases
+    docker-compose          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
+    forgit                  # https://github.com/wfxr/forgit/issues/212
+    aliases                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/aliases
     aws
     command-not-found
     extract
@@ -103,7 +103,7 @@ plugins=(
     rsync
     systemd
     direnv
-    dotbare
+    dotbare                 # https://github.com/kazhala/dotbare
 )
 
 fpath=(/home/simone/.zsh-completion $fpath /usr/share/zsh/vendor-completions)
@@ -239,9 +239,11 @@ z() {
     cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 
+previous_tab_zle=$(bindkey "^I" | cut -d ' ' -f2)
+
 fzf-z-widget() {
     # if the executed command is z
-    [[ $BUFFER != "z "* ]] && zle fzf-completion && return
+    [[ $BUFFER != "z "* ]] && zle $previous_tab_zle && return
     
     # remove the z command from the buffer
     search="${BUFFER#z }"
