@@ -54,6 +54,7 @@ disable = ["system", "snap", "flatpak", "gcloud"]
 # Commands to run before anything
 [pre_commands]
 #"Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
+"docker cleanup" = "docker container prune -f --filter \"until=300h\" && docker image prune -f -a --filter \"until=300h\" && docker volume prune -f --filter \"label!=keep\" && docker network prune -f --filter \"until=300h\" && docker builder prune -f --filter \"until=300h\""
 
 # Custom commands
 [commands]

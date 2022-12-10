@@ -76,6 +76,11 @@ ZSH_THEME="robbyrussell"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+
+source "/usr/share/fzf/key-bindings.zsh"
+source "/usr/share/fzf/completion.zsh"
+
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -84,26 +89,26 @@ ZSH_THEME="robbyrussell"
 plugins=(
     zsh-interactive-cd
     git
+    poetry
     zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
     zsh-autosuggestions     # https://github.com/zsh-users/zsh-autosuggestions
     zsh-completions         # https://github.com/zsh-users/zsh-completions
-    zsh-z                   # https://github.com/agkozak/zsh-z
     colored-man-pages       # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
-    docker
+    docker                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker
     docker-compose          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
     forgit                  # https://github.com/wfxr/forgit/issues/212
     aliases                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/aliases
     aws
-    command-not-found
-    extract
-    fzf
-    git-auto-fetch
-    #gitignore
-    jsontools
-    rsync
-    systemd
-    direnv
+    extract                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract
+    fzf                     # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
+    fzf-tab                 # https://github.com/Aloxaf/fzf-tab
+    git-auto-fetch          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
+    jsontools               # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/jsontools
+    rsync                   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/rsync
+    systemd                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/systemd
+    direnv                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/direnv
     dotbare                 # https://github.com/kazhala/dotbare
+    zsh-z                   # https://github.com/agkozak/zsh-z
 )
 
 fpath=(/home/simone/.zsh-completion $fpath /usr/share/zsh/vendor-completions)
@@ -164,19 +169,32 @@ alias h2='function hdi(){ howdoi $* -ca | less --raw-control-chars --quit-if-one
 alias tlmgr='TEXMFDIST/scripts/texlive/tlmgr.pl --usermode'
 alias rename="perl-rename"
 
-# export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-# export FZF_CTRL_T_OPTS="--select-1 --exit-0"
-# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-#
-# fzf-history-widget-accept() {
-#     fzf-history-widget
-#     zle accept-line
-# }
-# zle     -N     fzf-history-widget-accept
-# bindkey '^X^R' fzf-history-widget-accept
 
-source "/usr/share/fzf/key-bindings.zsh"
-source "/usr/share/fzf/completion.zsh"
+# those functions are to provide a better interface to the json plugin
+# allow for bot pipe and terminal input and give systax highlight 
+# with bat
+json(){
+    local j
+    if [ -t 0 ]; then
+        # terminal
+        j=$(cat $1)
+    else
+        # pipe
+        j=$(< /dev/stdin)
+    fi
+    echo $j | pp_json | bat -l json
+}
+jsonl(){
+    local j
+    if [ -t 0 ]; then
+        # terminal
+        j=$(head -n2 $1)
+    else
+        # pipe
+        j=$(head -n2 < /dev/stdin)
+    fi
+    echo $j | pp_ndjson | bat -l json
+}
 
 cheat() {
     curl -s cheat.sh/$1 | less
@@ -233,32 +251,4 @@ export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"
 alias igit="git forgit"
 
 
-unalias z 2> /dev/null
-z() {
-    [ $# -gt 0 ] && zshz "$*" && return
-    cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
-}
-
-previous_tab_zle=$(bindkey "^I" | cut -d ' ' -f2)
-
-fzf-z-widget() {
-    # if the executed command is z
-    [[ $BUFFER != "z "* ]] && zle $previous_tab_zle && return
-    
-    # remove the z command from the buffer
-    search="${BUFFER#z }"
-    dir=$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }$search" | sed 's/^[0-9,.]* *//')
-    
-    if [[ -z "$dir" ]]; then
-        zle redisplay
-        return 0
-    fi
-    BUFFER="builtin cd -- ${(q)dir}"
-    zle accept-line
-    unset dir # ensure this doesn't end up appearing in prompt expansion
-    zle reset-prompt
-}
-
-zle     -N   fzf-z-widget
-bindkey '^I' fzf-z-widget
 

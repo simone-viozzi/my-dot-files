@@ -114,6 +114,7 @@ DelayFocusInterval=100
 ElectricBorderMaximize=false
 ElectricBorderTiling=false
 FocusPolicy=FocusUnderMouse
+RollOverDesktops=true
 
 [org.kde.kdecoration2]
 library=org.kde.bismuth.decoration
