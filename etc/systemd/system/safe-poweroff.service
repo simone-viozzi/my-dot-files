@@ -1,0 +1,9 @@
+[Unit]
+Description=poweroff
+
+[Install]
+WantedBy=default.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/safe-poweroff.sh

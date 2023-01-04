@@ -1,0 +1,9 @@
+[Unit]
+Description=Run snap-sync-cleanup
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/snap-sync-cleanup.sh
