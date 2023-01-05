@@ -95,23 +95,23 @@ source "/usr/share/fzf/completion.zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
-	zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
-	zsh-autosuggestions	# https://github.com/zsh-users/zsh-autosuggestions
-	forgit			# https://github.com/wfxr/forgit/issues/212
-	colored-man-pages	# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
-	docker			# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker
-	docker-compose		# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
-	aliases			# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/aliases
-	dotbare			# https://github.com/kazhala/dotbare
-	fzf			# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
-	fzf-tab			# https://github.com/Aloxaf/fzf-tab
-	tmux			# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
-	systemd			# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/systemd
-	rsync                   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/rsync
-	git-auto-fetch          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
-	extract			# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract
-	zsh-z 			# https://github.com/agkozak/zsh-z
+    git
+    zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
+    zsh-autosuggestions	    # https://github.com/zsh-users/zsh-autosuggestions
+    forgit		    	    # https://github.com/wfxr/forgit/issues/212
+    colored-man-pages	    # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
+    docker			        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker
+    docker-compose		    # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
+    aliases			        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/aliases
+    dotbare			        # https://github.com/kazhala/dotbare
+    fzf			            # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
+    fzf-tab			        # https://github.com/Aloxaf/fzf-tab
+    tmux			        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
+    systemd			        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/systemd
+    rsync                   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/rsync
+    git-auto-fetch          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
+    extract			        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract
+    zsh-z 			        # https://github.com/agkozak/zsh-z
 )
 
 # https://github.com/zsh-users/zsh-completions
@@ -155,7 +155,7 @@ source $ZSH/oh-my-zsh.sh
 
 # https://github.com/wfxr/forgit#git
 #   - use git forgit ... to get interactive version
-export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"
+export PATH="$PATH:${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin"
 
 alias rename='perl-rename'
 alias igit="git forgit"
@@ -172,6 +172,9 @@ alias tree-git='exa --icons --tree --git-ignore'
 alias poweroff='systemctl poweroff --check-inhibitors=yes'
 alias reboot='systemctl reboot --check-inhibitors=yes'
 
+# https://github.com/kazhala/dotbare
+_dotbare_completion_cmd
+_dotbare_completion_git
 export DOTBARE_DIR="/.cfg"
 export DOTBARE_TREE="/"
 
