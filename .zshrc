@@ -247,7 +247,7 @@ eval "$(pyenv init -)"
 
 # https://github.com/wfxr/forgit#git
 #   - use git forgit ... to get interactive version
-export PATH="$PATH:$FORGIT_INSTALL_DIR/bin"
+export PATH="$PATH:${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin"
 alias igit="git forgit"
 
 
