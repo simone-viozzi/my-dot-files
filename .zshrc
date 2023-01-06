@@ -217,11 +217,9 @@ alias night="alacritty-colorscheme -V apply $DARK_COLOR"
 alias toggle="alacritty-colorscheme -V toggle $LIGHT_COLOR $DARK_COLOR"
 
 
-export DIFFPROG="gksu meld"
-
-
-### https://github.com/kazhala/dotbare
+# https://github.com/kazhala/dotbare
 _dotbare_completion_cmd
+_dotbare_completion_git
 export DOTBARE_DIR="$HOME/.cfg"
 export DOTBARE_TREE="$HOME"
 
