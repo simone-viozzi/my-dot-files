@@ -206,3 +206,4 @@ export LIBVIRT_DEFAULT_URI='qemu:///system'
 
 eval `oidc-agent-service start` > /dev/null 2>&1
 
+eval "$(direnv hook zsh)"

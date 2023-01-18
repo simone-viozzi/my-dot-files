@@ -2,7 +2,7 @@
 #assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-#disable = ["system", "emacs"]
+disable = ["containers"]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]
@@ -59,6 +59,7 @@ skip_notify = true
 #"Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
 "1 - snap before upgrade" = """echo \"taking a snap...\" && \
                                    sudo snapper -c root create -t single -d \"snap before upgrade\" -c number && \
+                                   sudo snapper -c home create -t single -d \"snap before upgrade\" -c number && \
                                    echo \"snap done...\""""
 "2 - docker cleanup" = """docker container prune -f --filter \"until=300h\" && \
                           docker image prune -f -a --filter \"until=300h\" && \
@@ -68,7 +69,9 @@ skip_notify = true
 [post_commands]
 "snapper cleanup" = """echo \"cleaning up the snaps...\" && \
                        sudo snapper -c root cleanup number && \
-                       sudo snapper -c root list"""
+                       sudo snapper -c home cleanup number && \
+                       sudo snapper -c root list && \
+                       sudo snapper -c home list"""
 
 # Custom commands
 [commands]

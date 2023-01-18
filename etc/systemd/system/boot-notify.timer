@@ -1,0 +1,9 @@
+[Unit]
+Description="notify people when the server is online"
+
+[Timer]
+OnBootSec=1min
+AccuracySec=30sec
+
+[Install]
+WantedBy=default.target
