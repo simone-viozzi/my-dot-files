@@ -13,3 +13,5 @@
     cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [core]
 	editor = vim
+[init]
+	defaultBranch = main

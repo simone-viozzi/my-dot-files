@@ -169,33 +169,6 @@ alias h2='function hdi(){ howdoi $* -ca | less --raw-control-chars --quit-if-one
 alias tlmgr='TEXMFDIST/scripts/texlive/tlmgr.pl --usermode'
 alias rename="perl-rename"
 
-
-# those functions are to provide a better interface to the json plugin
-# allow for bot pipe and terminal input and give systax highlight 
-# with bat
-json(){
-    local j
-    if [ -t 0 ]; then
-        # terminal
-        j=$(cat $1)
-    else
-        # pipe
-        j=$(< /dev/stdin)
-    fi
-    echo $j | pp_json | bat -l json
-}
-jsonl(){
-    local j
-    if [ -t 0 ]; then
-        # terminal
-        j=$(head -n2 $1)
-    else
-        # pipe
-        j=$(head -n2 < /dev/stdin)
-    fi
-    echo $j | pp_ndjson | bat -l json
-}
-
 cheat() {
     curl -s cheat.sh/$1 | less
 }
