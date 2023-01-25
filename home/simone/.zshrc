@@ -2,22 +2,8 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
-setopt autocd extendedglob nomatch notify
-unsetopt beep
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-#zstyle :compinstall filename '/home/simone/.zshrc'
-
-# End of lines added by compinstall
-
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -95,31 +81,31 @@ source "/usr/share/fzf/completion.zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    aliases                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/aliases
+    colored-man-pages       # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
+    direnv                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/direnv
+    docker                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker
+    docker-compose          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
+    dotbare                 # https://github.com/kazhala/dotbare
+    extract                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract
+    forgit                  # https://github.com/wfxr/forgit/issues/212
+    fzf                     # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
     git
-    zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
-    zsh-autosuggestions	    # https://github.com/zsh-users/zsh-autosuggestions
-    forgit		    	    # https://github.com/wfxr/forgit/issues/212
-    colored-man-pages	    # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
-    docker			        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker
-    docker-compose		    # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
-    aliases			        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/aliases
-    dotbare			        # https://github.com/kazhala/dotbare
-    fzf			            # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
-    fzf-tab			        # https://github.com/Aloxaf/fzf-tab
-    tmux			        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
-    systemd			        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/systemd
-    rsync                   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/rsync
     git-auto-fetch          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
-    extract			        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract
-    zsh-z 			        # https://github.com/agkozak/zsh-z
+    rsync                   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/rsync
+    systemd                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/systemd
+    tmux                    # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
+    zsh-autosuggestions     # https://github.com/zsh-users/zsh-autosuggestions
+    zsh-interactive-cd
+    zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
+    # need to be at the bottom
+    fzf-tab                 # https://github.com/Aloxaf/fzf-tab
 )
 
 # https://github.com/zsh-users/zsh-completions
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
-autoload -Uz compinit
-compinit
-
+autoload -Uz compinit && compinit
 export FZF_BASE=/usr/bin/fzf
 
 source $ZSH/oh-my-zsh.sh
@@ -157,20 +143,20 @@ source $ZSH/oh-my-zsh.sh
 #   - use git forgit ... to get interactive version
 export PATH="$PATH:${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin"
 
-alias rename='perl-rename'
-alias igit="git forgit"
-alias yolo='git add . && curl -s https://whatthecommit.com/index.txt | git commit -F - && git push'
-alias conf='dotbare'
-alias conf-yolo='curl -s https://whatthecommit.com/index.txt | conf commit -a -F - && conf push'
 alias a='acs'
+alias conf-yolo='curl -s https://whatthecommit.com/index.txt | conf commit -a -F - && conf push'
+alias conf='dotbare'
 alias du='echo "WARNING use dust" && du'
-alias ls='exa --icons -F'
+alias igit='git forgit'
 alias la='exa -la --icons -F'
 alias lg='exa -l -F --icons --git --sort=modified'
-alias tree='exa -F --icons --tree'
-alias tree-git='exa --icons --tree --git-ignore'
+alias ls='exa --icons -F'
 alias poweroff='systemctl poweroff --check-inhibitors=yes'
 alias reboot='systemctl reboot --check-inhibitors=yes'
+alias rename='perl-rename'
+alias tree-git='exa --icons --tree --git-ignore'
+alias tree='exa -F --icons --tree'
+alias yolo='git add . && curl -s https://whatthecommit.com/index.txt | git commit -F - && git push'
 
 # https://github.com/kazhala/dotbare
 _dotbare_completion_cmd
@@ -178,32 +164,9 @@ _dotbare_completion_git
 export DOTBARE_DIR="/.cfg"
 export DOTBARE_TREE="/"
 
-json() {
-    local j
-    if [ -t 0 ]; then
-        # terminal
-        j=$(cat $1)
-    else
-        # pipe
-        j=$(< /dev/stdin)
-    fi
-    echo $j | pp_json | bat -l json
-}
-
-jsonl() {
-    local j
-    if [ -t 0 ]; then
-        # terminal
-        j=$(head -n2 $1)
-    else
-        # pipe
-        j=$(head -n2 < /dev/stdin)
-    fi
-    echo $j | pp_ndjson | bat -l json
-}
-
 export LIBVIRT_DEFAULT_URI='qemu:///system'
 
 eval `oidc-agent-service start` > /dev/null 2>&1
 
-eval "$(direnv hook zsh)"
+# https//github.com/ajeetdsouza/zoxide 
+eval "$(zoxide init zsh)"
