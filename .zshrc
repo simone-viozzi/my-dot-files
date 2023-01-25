@@ -1,13 +1,13 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
+#(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
+#(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -19,7 +19,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -108,7 +108,6 @@ plugins=(
     systemd                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/systemd
     direnv                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/direnv
     dotbare                 # https://github.com/kazhala/dotbare
-    zsh-z                   # https://github.com/agkozak/zsh-z
 )
 
 fpath=(/home/simone/.zsh-completion $fpath /usr/share/zsh/vendor-completions)
@@ -148,10 +147,15 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/home/simone/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
 
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# https://github.com/wfxr/forgit#git
+#   - use git forgit ... to get interactive version
+export PATH="$PATH:${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin"
+alias igit="git forgit"
 
 
 alias ls='exa --icons -F'
@@ -197,29 +201,23 @@ export DOTBARE_DIR="$HOME/.cfg"
 export DOTBARE_TREE="$HOME"
 
 
-
 revive-mouse () {
     sudo bash -c 'echo -n "0000:08:00.3" > /sys/bus/pci/drivers/xhci_hcd/unbind'
     sudo bash -c 'echo -n "0000:08:00.3" > /sys/bus/pci/drivers/xhci_hcd/bind'
 }
 
-
+# perl stuff
 PATH="/home/simone/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/simone/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/simone/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/simone/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/simone/perl5"; export PERL_MM_OPT;
 
-
+# pyrnv stuff
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 
-# https://github.com/wfxr/forgit#git
-#   - use git forgit ... to get interactive version
-export PATH="$PATH:${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin"
-alias igit="git forgit"
-
-
-
+# https://github.com/ajeetdsouza/zoxid://github.com/ajeetdsouza/zoxide 
+eval "$(zoxide init zsh)"
