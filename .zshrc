@@ -1,13 +1,10 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-#(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-#(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -87,32 +84,32 @@ source "/usr/share/fzf/completion.zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    zsh-interactive-cd
-    git
-    poetry
-    zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
-    zsh-autosuggestions     # https://github.com/zsh-users/zsh-autosuggestions
-    zsh-completions         # https://github.com/zsh-users/zsh-completions
-    colored-man-pages       # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
-    docker                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker
-    docker-compose          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
-    forgit                  # https://github.com/wfxr/forgit/issues/212
     aliases                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/aliases
     aws
+    colored-man-pages       # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
+    direnv                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/direnv
+    docker                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker
+    docker-compose          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
+    dotbare                 # https://github.com/kazhala/dotbare
     extract                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract
+    forgit                  # https://github.com/wfxr/forgit/issues/212
     fzf                     # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
-    fzf-tab                 # https://github.com/Aloxaf/fzf-tab
+    git
     git-auto-fetch          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
-    jsontools               # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/jsontools
+    poetry
     rsync                   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/rsync
     systemd                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/systemd
-    direnv                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/direnv
-    dotbare                 # https://github.com/kazhala/dotbare
+    zsh-autosuggestions     # https://github.com/zsh-users/zsh-autosuggestions
+    zsh-interactive-cd
+    zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
+    # need to be at the bottom
+    fzf-tab                 # https://github.com/Aloxaf/fzf-tab
 )
 
-fpath=(/home/simone/.zsh-completion $fpath /usr/share/zsh/vendor-completions)
+# https://github.com/zsh-users/zsh-completions
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 export FZF_BASE=/usr/bin/fzf
 
 source $ZSH/oh-my-zsh.sh
@@ -143,35 +140,29 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# add ruby to path
-export PATH="/home/simone/.local/share/gem/ruby/3.0.0/bin:$PATH"
-
-
-#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # https://github.com/wfxr/forgit#git
 #   - use git forgit ... to get interactive version
 export PATH="$PATH:${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin"
-alias igit="git forgit"
 
-
-alias ls='exa --icons -F'
+alias a='acs'
+alias conf-yolo='curl -s https://whatthecommit.com/index.txt | conf commit -a -F - && conf push'
+alias conf='dotbare'
+alias du='echo "WARNING use dust" && du'
+alias h2='function hdi(){ howdoi $* -ca | less --raw-control-chars --quit-if-one-screen --no-init; }; hdi'
+alias igit='git forgit'
 alias la='exa -la --icons -F'
 alias lg='exa -l -F --icons --git --sort=modified'
-alias tree='exa -F --icons --tree'
-alias tree-git='exa --icons --tree --git-ignore'
-alias du='echo "WARNING use dust" && du'
-alias xopen="gio open 2>/dev/null"
-alias yolo="git add . && curl -s https://whatthecommit.com/index.txt | git commit -F - && git push"
-alias conf='dotbare'
-alias conf-yolo="curl -s https://whatthecommit.com/index.txt | conf commit -a -F - && conf push"
-alias a="acs"
-alias h2='function hdi(){ howdoi $* -ca | less --raw-control-chars --quit-if-one-screen --no-init; }; hdi'
+alias ls='exa --icons -F'
+alias rename='perl-rename'
 alias tlmgr='TEXMFDIST/scripts/texlive/tlmgr.pl --usermode'
-alias rename="perl-rename"
+alias tree-git='exa --icons --tree --git-ignore'
+alias tree='exa -F --icons --tree'
+alias xopen='gio open 2>/dev/null'
+alias yolo='git add . && curl -s https://whatthecommit.com/index.txt | git commit -F - && git push'
+
 
 cheat() {
     curl -s cheat.sh/$1 | less
@@ -206,6 +197,9 @@ revive-mouse () {
     sudo bash -c 'echo -n "0000:08:00.3" > /sys/bus/pci/drivers/xhci_hcd/bind'
 }
 
+# add ruby to path
+export PATH="/home/simone/.local/share/gem/ruby/3.0.0/bin:$PATH"
+
 # perl stuff
 PATH="/home/simone/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/simone/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
@@ -217,7 +211,6 @@ PERL_MM_OPT="INSTALL_BASE=/home/simone/perl5"; export PERL_MM_OPT;
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
 
 # https://github.com/ajeetdsouza/zoxid://github.com/ajeetdsouza/zoxide 
 eval "$(zoxide init zsh)"
