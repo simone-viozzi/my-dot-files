@@ -117,7 +117,7 @@ set t_vb=
 set tm=500
 
 " Add a bit extra margin to the left
-set foldcolumn=1
+"set foldcolumn=1
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
