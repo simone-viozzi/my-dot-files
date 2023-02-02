@@ -219,4 +219,7 @@ let g:indent_guides_guide_size = 1
 
 set number
 
-set clipboard=unnamedplus,autoselect,exclude:cons\\\\|linux
+set clipboard=unnamedplus,exclude:cons\\\\|linux
+
+set ttymouse=sgr
+set mouse=a

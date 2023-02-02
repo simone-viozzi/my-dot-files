@@ -14,7 +14,7 @@ disable = ["containers"]
 #no_retry = true
 
 # Run inside tmux
-#run_in_tmux = true
+run_in_tmux = true
 
 # List of remote machines with Topgrade installed on them
 #remote_topgrades = ["toothless", "pi", "parnas"]
@@ -106,7 +106,7 @@ skip_notify = true
 
 [firmware]
 # Offer to update firmware; if false just check for and display available updates
-#upgrade = true
+upgrade = true
 
 [flatpak]
 # Use sudo for updating the system-wide installation

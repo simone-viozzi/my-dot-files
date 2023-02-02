@@ -177,3 +177,6 @@ eval `oidc-agent-service start` > /dev/null 2>&1
 
 # https//github.com/ajeetdsouza/zoxide 
 eval "$(zoxide init zsh)"
+
+# https://github.com/Canop/broot
+source /home/simone/.config/broot/launcher/bash/br

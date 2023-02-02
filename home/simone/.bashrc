@@ -41,3 +41,5 @@ ugdrive () {
 
 eval "$(direnv hook bash)"
 alias yolo="git add . && curl -s http://whatthecommit.com/index.txt | git commit -F - && git push"
+
+source /home/simone/.config/broot/launcher/bash/br
