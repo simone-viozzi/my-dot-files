@@ -117,7 +117,7 @@ set t_vb=
 set tm=500
 
 " Add a bit extra margin to the left
-set foldcolumn=1
+"set foldcolumn=1
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -219,4 +219,7 @@ let g:indent_guides_guide_size = 1
 
 set number
 
-set clipboard=unnamedplus,autoselect,exclude:cons\\\\|linux
+set clipboard=unnamedplus,exclude:cons\\\\|linux
+
+set ttymouse=sgr
+set mouse=a
