@@ -1487,3 +1487,10 @@ sudo systemctl enable containerd.service
 
     conf push -u origin dotfiles
     ```
+
+## move firefox profile and cache to ram
+
+Follow
+
+- <https://wiki.archlinux.org/title/Profile-sync-daemon>
+- <https://wiki.archlinux.org/title/Firefox/Tweaks#Turn_off_the_disk_cache>
