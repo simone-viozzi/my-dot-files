@@ -180,3 +180,6 @@ eval "$(zoxide init zsh)"
 
 # https://github.com/Canop/broot
 source /home/simone/.config/broot/launcher/bash/br
+
+# set vim as the editor
+export EDITOR='vim'
