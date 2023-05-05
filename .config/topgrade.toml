@@ -58,7 +58,7 @@ disable = ["system", "snap", "flatpak", "gcloud", "config_update", "containers"]
 
 # Custom commands
 [commands]
-"pacdiff" = "DIFFPROG=/usr/bin/kompare MERGEPROG=/usr/bin/kompare /usr/bin/pacdiff -s"
+"pacdiff" = "DIFFPROG=/usr/bin/meld /usr/bin/pacdiff -s -b"
 #"Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
 
 [brew]
