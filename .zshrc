@@ -222,3 +222,6 @@ eval "$(zoxide init zsh)"
 
 # https://github.com/Canop/broot 
 source /home/simone/.config/broot/launcher/bash/br
+
+# add npm global packages to path
+export PATH="/home/simone/.npm-global/bin:$PATH"
