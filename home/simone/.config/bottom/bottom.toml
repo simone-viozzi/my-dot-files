@@ -151,8 +151,8 @@ default_time_value = 120000
 
 [mount_filter]
 is_list_ignored = true
-list = ["/boot", "/var", "/home", "/.snapshots", "/srv", "/system-backup"]
-#regex = true
+list = ["/boot", "/var/.*", "/home", "/.snapshots", "/srv", "/system-backup", "/docker-volumes", "/swap", "/quemu-storage-pool"]
+regex = true
 #case_sensitive = false
 #whole_word = false
 
@@ -163,9 +163,9 @@ list = ["PCH", "AUX"]
 #case_sensitive = false
 #whole_word = false
 
-#[net_filter]
-#is_list_ignored = true
-#list = ["virbr0.*"]
-#regex = true
-#case_sensitive = false
-#whole_word = false
+[net_filter]
+is_list_ignored = true
+list = ["docker.*", "br-.*", "lo", "tun.*", "virbr.*"]
+regex = true
+case_sensitive = false
+whole_word = false

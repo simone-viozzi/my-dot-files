@@ -164,6 +164,8 @@ alias rename='perl-rename'
 alias tree-git='exa --icons --tree --git-ignore'
 alias tree='exa -F --icons --tree'
 alias yolo='git add . && curl -s https://whatthecommit.com/index.txt | git commit -F - && git push'
+alias br="TERM=xterm-256color br"
+
 
 # https://github.com/kazhala/dotbare
 _dotbare_completion_cmd
@@ -173,7 +175,7 @@ export DOTBARE_TREE="/"
 
 export LIBVIRT_DEFAULT_URI='qemu:///system'
 
-eval `oidc-agent-service start` > /dev/null 2>&1
+#eval `oidc-agent-service start` > /dev/null 2>&1
 
 # https//github.com/ajeetdsouza/zoxide 
 eval "$(zoxide init zsh)"
