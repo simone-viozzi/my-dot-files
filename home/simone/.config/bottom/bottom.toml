@@ -69,6 +69,7 @@ default_time_value = 120000
 #network_use_log = false
 # Hides advanced options to stop a process on Unix-like systems.
 #disable_advanced_kill = false
+enable_gpu_memory = true
 
 # These are all the components that support custom theming.  Note that colour support
 # will depend on terminal support.
