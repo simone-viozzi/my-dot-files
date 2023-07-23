@@ -152,7 +152,7 @@ source $ZSH/oh-my-zsh.sh
 #   - use git forgit ... to get interactive version
 export PATH="$PATH:${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin"
 
-alias a='acs'
+alias a='als'
 alias conf-yolo='curl -s https://whatthecommit.com/index.txt | conf commit -a -F - && conf push'
 alias conf='dotbare'
 alias du='echo "WARNING use dust" && du'
@@ -225,3 +225,4 @@ source /home/simone/.config/broot/launcher/bash/br
 
 # add npm global packages to path
 export PATH="/home/simone/.npm-global/bin:$PATH"
+
