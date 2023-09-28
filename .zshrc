@@ -156,22 +156,18 @@ alias a='als'
 alias conf-yolo='curl -s https://whatthecommit.com/index.txt | conf commit -a -F - && conf push'
 alias conf='dotbare'
 alias du='echo "WARNING use dust" && du'
-alias h2='function hdi(){ howdoi $* -ca | less --raw-control-chars --quit-if-one-screen --no-init; }; hdi'
 alias igit='git forgit'
-alias la='exa -la --icons -F'
-alias lg='exa -l -F --icons --git --sort=modified'
-alias ls='exa --icons -F'
+alias la='eza -la --icons -F'
+alias lg='eza -l -F --icons --git --sort=modified'
+alias ls='eza --icons -F'
 alias rename='perl-rename'
 alias tlmgr='TEXMFDIST/scripts/texlive/tlmgr.pl --usermode'
-alias tree-git='exa --icons --tree --git-ignore'
-alias tree='exa -F --icons --tree'
+alias tree-git='eza --icons --tree --git-ignore'
+alias tree='eza -F --icons --tree'
 alias xopen='gio open 2>/dev/null'
 alias yolo='git add . && curl -s https://whatthecommit.com/index.txt | git commit -F - && git push'
-
-
-cheat() {
-    curl -s cheat.sh/$1 | less
-}
+alias df='duf'
+alias diff='delta'
 
 docker-cleanup () {
     docker container prune -f --filter "until=300h"
@@ -195,12 +191,6 @@ _dotbare_completion_cmd
 _dotbare_completion_git
 export DOTBARE_DIR="$HOME/.cfg"
 export DOTBARE_TREE="$HOME"
-
-
-revive-mouse () {
-    sudo bash -c 'echo -n "0000:08:00.3" > /sys/bus/pci/drivers/xhci_hcd/unbind'
-    sudo bash -c 'echo -n "0000:08:00.3" > /sys/bus/pci/drivers/xhci_hcd/bind'
-}
 
 # add ruby to path
 #export PATH="/home/simone/.local/share/gem/ruby/3.0.0/bin:$PATH"
@@ -226,3 +216,5 @@ source /home/simone/.config/broot/launcher/bash/br
 # add npm global packages to path
 export PATH="/home/simone/.npm-global/bin:$PATH"
 
+# add cargo packages to path
+export PATH="/home/simone/.cargo/bin:$PATH"
