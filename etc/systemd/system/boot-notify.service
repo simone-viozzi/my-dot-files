@@ -1,6 +1,7 @@
 [Unit]
 Description=send a notification when the server is powered on
-Wants=docker.service
+Requires=docker.service
+After=network.online.target
 
 [Install]
 WantedBy=default.target

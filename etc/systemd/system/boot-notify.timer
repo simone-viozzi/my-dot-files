@@ -2,7 +2,7 @@
 Description="notify people when the server is online"
 
 [Timer]
-OnBootSec=1min
+OnBootSec=2min
 AccuracySec=30sec
 
 [Install]

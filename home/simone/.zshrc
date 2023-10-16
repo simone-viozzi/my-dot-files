@@ -150,22 +150,23 @@ source $ZSH/oh-my-zsh.sh
 #   - use git forgit ... to get interactive version
 export PATH="$PATH:${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/forgit/bin"
 
-alias a='acs'
+alias a='als'
 alias conf-yolo='curl -s https://whatthecommit.com/index.txt | conf commit -a -F - && conf push'
 alias conf='dotbare'
 alias du='echo "WARNING use dust" && du'
 alias igit='git forgit'
-alias la='exa -la --icons -F'
-alias lg='exa -l -F --icons --git --sort=modified'
-alias ls='exa --icons -F'
+alias la='eza -la --icons -F'
+alias lg='eza -l -F --icons --git --sort=modified'
+alias ls='eza --icons -F'
 alias poweroff='systemctl poweroff --check-inhibitors=yes'
 alias reboot='systemctl reboot --check-inhibitors=yes'
 alias rename='perl-rename'
-alias tree-git='exa --icons --tree --git-ignore'
-alias tree='exa -F --icons --tree'
+alias tree-git='eza --icons --tree --git-ignore'
+alias tree='eza -F --icons --tree'
 alias yolo='git add . && curl -s https://whatthecommit.com/index.txt | git commit -F - && git push'
 alias br="TERM=xterm-256color br"
-
+alias df="TERM=xterm-256color duf"
+alias diff='delta'
 
 # https://github.com/kazhala/dotbare
 _dotbare_completion_cmd
