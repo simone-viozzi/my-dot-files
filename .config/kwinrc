@@ -111,7 +111,13 @@ BorderActivate=9
 [Tiling]
 padding=4
 
+[Tiling][4d8efb68-4e95-5df9-8247-52c31982077d]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][50aa3ba7-0333-5a89-bd14-0024b5214afc]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][5b7a5ba4-43cc-5910-8e98-f358f9d54b43]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][7523b426-0393-51f9-9521-bc613d5dad5f]

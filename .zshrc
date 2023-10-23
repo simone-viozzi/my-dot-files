@@ -91,14 +91,14 @@ source "/usr/share/fzf/completion.zsh"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     aliases                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/aliases
-    aws
+    #aws
     colored-man-pages       # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
     direnv                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/direnv
     docker                  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker
     docker-compose          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker-compose
     dotbare                 # https://github.com/kazhala/dotbare
     extract                 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract
-    forgit                  # https://github.com/wfxr/forgit/issues/212
+    #forgit                  # https://github.com/wfxr/forgit/issues/212
     fzf                     # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
     git
     git-auto-fetch          # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
