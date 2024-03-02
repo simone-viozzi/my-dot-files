@@ -1,0 +1,76 @@
+[[colors.indexed_colors]]
+color = "0xd19a66"
+index = 16
+
+[[colors.indexed_colors]]
+color = "0xbe5046"
+index = 17
+
+[[colors.indexed_colors]]
+color = "0x353b45"
+index = 18
+
+[[colors.indexed_colors]]
+color = "0x3e4451"
+index = 19
+
+[[colors.indexed_colors]]
+color = "0x565c64"
+index = 20
+
+[[colors.indexed_colors]]
+color = "0xb6bdca"
+index = 21
+
+[colors.bright]
+black = "0x5c6370"
+blue = "0x61afef"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xe06c75"
+white = "0xffffff"
+yellow = "0xd19a66"
+
+[colors.cursor]
+cursor = "0xabb2bf"
+text = "0x1e2127"
+
+[colors.dim]
+black = "0x31363b"
+blue = "0x1b668f"
+cyan = "0x186c60"
+green = "0x17a262"
+magenta = "0x614a73"
+red = "0x783228"
+white = "0x63686d"
+yellow = "0xb65619"
+
+[colors.normal]
+black = "0x1e2127"
+blue = "0x61afef"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xe06c75"
+white = "0xabb2bf"
+yellow = "0xd19a66"
+
+[colors.primary]
+background = "0x1e2127"
+foreground = "0xabb2bf"
+
+[colors.search.focused_match]
+background = "CellForeground"
+foreground = "CellBackground"
+
+[colors.search.matches]
+background = "0xb26818"
+foreground = "0xb2b2b2"
+
+[colors.selection]
+background = "#f2f2f2"
+text = "#403f53"
+
+[font.normal]
+family = "MesloLGS NF"

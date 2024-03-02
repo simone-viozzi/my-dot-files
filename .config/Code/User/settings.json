@@ -1,0 +1,140 @@
+{
+    "[dockercompose]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[dotenv]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnType": true,
+    },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[toml]": {
+        "editor.defaultFormatter": "tamasfe.even-better-toml"
+    },
+    "diffEditor.codeLens": true,
+    "editor.defaultFormatter": "ms-python.vscode-pylance",
+    "editor.fontFamily": "Fira Code, Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.inlineSuggest.enabled": true,
+    "editor.largeFileOptimizations": true,
+    "editor.stickyScroll.enabled": true,
+    "editor.suggest.matchOnWordStartOnly": false,
+    "editor.suggestSelection": "first",
+    "editor.unicodeHighlight.allowedLocales": {
+        "it": true
+    },
+    "files.autoSave": "afterDelay",
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/.hg/store/**": true,
+        "**/node_modules/*/**": true
+    },
+    "git.enableSmartCommit": true,
+    "git.ignoreMissingGitWarning": true,
+    "github.copilot.enable": {
+        "*": true,
+        "markdown": false,
+        "plaintext": false,
+        "python": true,
+        "yaml": false
+    },
+    "github.copilot.editor.enableAutoCompletions": true,
+    "githubIssues.queries": [
+        {
+            "label": "My Issues",
+            "query": "default"
+        },
+        {
+            "label": "Created Issues",
+            "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+        },
+        {
+            "label": "Recent Issues",
+            "query": "state:open repo:${owner}/${repository} sort:updated-desc"
+        }
+    ],
+    "gitlens.defaultDateFormat": "YYYY-MM-DD HH:MM",
+    "gitlens.defaultDateShortFormat": "YYYY-MM-DD",
+    "gitlens.defaultTimeFormat": "HH:MM",
+    "gitlens.hovers.currentLine.over": "line",
+    "json.maxItemsComputed": 50000,
+    "jupyter.askForKernelRestart": false,
+    "jupyter.debugJustMyCode": false,
+    //"python.terminal.activateEnvInCurrentTerminal": false,
+    //"terminal.integrated.inheritEnv": false,
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
+    ],
+    "python.analysis.extraPaths": [],
+    "python.analysis.typeCheckingMode": "basic",
+    //"python.autoComplete.extraPaths": [],
+    //"python.terminal.activateEnvironment": false,
+    "redhat.telemetry.enabled": false,
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ],
+    "spellright.language": [
+        "en_US"
+    ],
+    "sqltools.useNodeRuntime": true,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.env.linux": {
+        "EDITOR": "code --wait",
+        "GIT_EDITOR": "code --wait"
+    },
+    "terminal.integrated.fontFamily": "Fira Code, MesloLGS NF",
+    "terminal.integrated.shellIntegration.enabled": true,
+    "window.restoreWindows": "none",
+    "workbench.colorTheme": "Dracula Soft",
+    "workbench.editorAssociations": {
+        //"*.ipynb": "jupyter-notebook",
+        "*.pdf": "pdf.preview"
+    },
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.dontShowNewVersionMessage": true,
+    "diffEditor.diffAlgorithm": "advanced",
+    "editor.mouseWheelScrollSensitivity": 2.5,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    },
+    "cSpell.language": "en,it",
+    "cSpell.allowCompoundWords": true,
+    "cSpell.userWords": [
+        "astype",
+        "na",
+    ],
+    "window.density.editorTabHeight": "compact",
+    "debugpy.debugJustMyCode": false,
+    "sourcery.codeLens": false,
+    "window.titleBarStyle": "custom",
+    "workbench.activityBar.location": "top",
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "notebook.stickyScroll.enabled": true,
+    "workbench.tree.enableStickyScroll": true,
+
+}

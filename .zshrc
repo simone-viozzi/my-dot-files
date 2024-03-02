@@ -107,6 +107,7 @@ plugins=(
     zsh-autosuggestions     # https://github.com/zsh-users/zsh-autosuggestions
     zsh-interactive-cd
     zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
+    gitignore               # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/gitignore
     # need to be at the bottom
     fzf-tab                 # https://github.com/Aloxaf/fzf-tab
 )
